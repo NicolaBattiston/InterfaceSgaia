@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { prisma } from '../lib/prisma';
-import { generateNewLink } from '../services/linkService';
+import { prisma } from '../lib/prisma.js';
+import { generateNewLink } from '../services/linkService.js';
 import { z } from 'zod';
 
 // Validate incoming URL

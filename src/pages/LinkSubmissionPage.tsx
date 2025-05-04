@@ -1,9 +1,16 @@
 import React from 'react';
 import { LinkForm } from '../components/LinkForm';
+import { LoginForm } from '../components/LoginForm';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
+const token = localStorage.getItem('token');
+
+
 
 export const LinkSubmissionPage: React.FC = () => {
+    if (!token) {
+        return <LoginForm onSuccess={() => window.location.reload()} />;
+    }
   return (
     <div className="flex flex-col min-h-screen">
       <Header />

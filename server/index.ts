@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import linkRoutes from './routes/links';
-
+import linkRoutes from './routes/links.js';
+import authRoutes from './routes/auth.js';
 // Load environment variables
 dotenv.config();
 
@@ -18,9 +18,12 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
+// protect all /api/links behind auth:
+import { authenticate } from './middleware/auth.js';
+app.use('/api/links', authenticate, linkRoutes);
 // Routes
 app.use('/api/links', linkRoutes);
-
+app.use('/api/auth', authRoutes);
 // Health check
 app.get('/health', (_, res) => {
   res.status(200).json({ status: 'ok' });
